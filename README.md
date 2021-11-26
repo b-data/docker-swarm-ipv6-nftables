@@ -6,7 +6,8 @@ I have been running a single-node docker swarm on a Debian host for years. Since
 my ISP has also been providing IPv6 addresses for some time, I wanted to know
 whether Docker can handle a dual-stack network.
 
-What this project is about:
+What [this project](https://gitlab.com/b-data/docker/docker-swarm-ipv6-nftables)
+is about:
 
 *  nftables
 *  Single-node docker swarm
@@ -249,3 +250,5 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 *  Modify docker daemon: [Docker IPV6 Guide - DEV Community](https://dev.to/csgeek/docker-ipv6-guide-235d)
     *  [dockerd | Docker Documentation > Daemon configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file)
     *  [Enable IPv6 support | Docker Documentation](https://docs.docker.com/config/daemon/ipv6/)
+
+See also [notes](NOTES.md) for further information.

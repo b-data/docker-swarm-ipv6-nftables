@@ -134,7 +134,7 @@ docker exec -ti $(docker ps -q -f name=busybox_ipv6) ping6 -c 4 google.com
 
 **Note:** Setting `net.ipv6.conf.eth0.accept_ra=2` in
 `/etc/sysctl.d/99-ipv6.conf` is required for this to work.  
-:information: I don't understand exactly why this is needed.
+:information_source: I don't understand exactly why this is needed.
 
 ### Container to container
 
@@ -170,7 +170,7 @@ problems.
 
 ## IPv6 address range
 
-The address block `"2001:db8:1::/64"` mentioned on [Enable IPv6 support | Docker Documentation](https://docs.docker.com/config/daemon/ipv6/)
+The address block `2001:db8:1::/64` mentioned on [Enable IPv6 support | Docker Documentation](https://docs.docker.com/config/daemon/ipv6/)
 is a subnet of `2001:db8::/32`, which is
 
 > a reserved prefix for use in documentation.
@@ -186,4 +186,5 @@ Therefore, the private `fd00::/80` subnet is used in this project.
    [Deploy services to a swarm | Docker Documentation](https://docs.docker.com/engine/swarm/services/)
 *  Alternative: Publish ports using the routing mesh: [moby/moby#24379 (comment)](https://github.com/moby/moby/issues/24379#issuecomment-569603301)
 *  IPv6 address range: [Docker - ArchWiki > Configuration > IPv6](https://wiki.archlinux.org/title/Docker#IPv6)
+    *  [RFC 3849: IPv6 Address Prefix Reserved for Documentation](https://www.rfc-editor.org/rfc/rfc3849)
     *  [RFC 4193: Unique Local IPv6 Unicast Addresses](https://www.rfc-editor.org/rfc/rfc4193)
