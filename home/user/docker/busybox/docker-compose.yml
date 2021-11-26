@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  ipv6:
+    image: busybox
+    networks:
+      - webproxy
+    tty: true
+
+networks:
+  webproxy:
+    external: true
