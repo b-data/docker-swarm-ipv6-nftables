@@ -1,0 +1,11 @@
+[Socket]
+ListenStream=%i
+Accept=no
+Service=swarm-ipv6@%i.service
+BindIPv6Only=ipv6-only
+ReusePort=true
+#MaxConnectionsPerSource=15
+FreeBind=true
+
+[Install]
+WantedBy=sockets.target

@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:${TF_VERSION}
+    ports:
+      - target: 80
+        published: 80
+        mode: host
+      - target: 443
+        published: 443
+        mode: host
+      #- target: 8080
+      #  published: 8080
+      #  mode: host
+    networks:
+      - webproxy
+    volumes:
+      - ${TF_HOME:-.}/config/acme:/etc/traefik/acme
+      - ${TF_HOME:-.}/config/files:/etc/traefik/files:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - TRAEFIK_GLOBAL_CHECKNEWVERSION=false
+      - TRAEFIK_GLOBAL_SENDANONYMOUSUSAGE=false
+      - TRAEFIK_ENTRYPOINTS_web=true
+      - TRAEFIK_ENTRYPOINTS_web_ADDRESS=:80
+      - TRAEFIK_ENTRYPOINTS_websecure=true
+      - TRAEFIK_ENTRYPOINTS_websecure_ADDRESS=:443
+      - TRAEFIK_CERTIFICATESRESOLVERS_${TF_CERTRESOLVER_NAME1}=true
+      - TRAEFIK_CERTIFICATESRESOLVERS_${TF_CERTRESOLVER_NAME1}_ACME_EMAIL=${TF_ACME_EMAIL}
+      - TRAEFIK_CERTIFICATESRESOLVERS_${TF_CERTRESOLVER_NAME1}_ACME_STORAGE=/etc/traefik/acme/acme_${TF_CERTRESOLVER_NAME1}.json
+      - TRAEFIK_CERTIFICATESRESOLVERS_${TF_CERTRESOLVER_NAME1}_ACME_HTTPCHALLENGE_ENTRYPOINT=web
+      - TRAEFIK_LOG=true
+      - TRAEFIK_API=false
+      - TRAEFIK_API_DASHBOARD=true
+      - TRAEFIK_API_INSECURE=false
+      - TRAEFIK_PING=false
+      - TRAEFIK_PROVIDERS_DOCKER=true
+      - TRAEFIK_PROVIDERS_DOCKER_WATCH=true
+      - TRAEFIK_PROVIDERS_DOCKER_SWARMMODE=true
+      - TRAEFIK_PROVIDERS_DOCKER_EXPOSEDBYDEFAULT=false
+      - TRAEFIK_PROVIDERS_FILE_DIRECTORY=/etc/traefik/files
+      - TRAEFIK_PROVIDERS_FILE_WATCH=true
+    deploy:
+      mode: global
+
+  whoami:
+    image: traefik/whoami
+    networks:
+      - webproxy
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.services.whoami.loadbalancer.server.port=80
+        - traefik.http.routers.whoami.entrypoints=web
+        - traefik.http.routers.whoami.rule=Host(`hostname.dyndns.org`)
+        - traefik.http.routers.whoami.middlewares=http2https@file
+        - traefik.http.routers.whoami-sec.entrypoints=websecure
+        - traefik.http.routers.whoami-sec.rule=Host(`hostname.dyndns.org`)
+        - traefik.http.routers.whoami-sec.tls.certresolver=dyndns-org
+        - traefik.http.routers.whoami-sec.middlewares=sts@file,security@file
+
+networks:
+  webproxy:
+    external: true

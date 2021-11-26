@@ -1,0 +1,13 @@
+[Unit]
+Description=IPv6 kludge-proxy for docker swarm (%i)
+Before=docker.service
+Requires=swarm-ipv6@%i.socket
+After=swarm-ipv6@%i.socket
+
+[Service]
+PrivateTmp=yes
+ExecStart=/lib/systemd/systemd-socket-proxyd 127.0.0.1:%i
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
