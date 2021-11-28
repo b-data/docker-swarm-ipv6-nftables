@@ -73,7 +73,17 @@ To install docker, follow the instructions for your platform:
 sudo nano /etc/sysctl.d/99-ipv6.conf
 ```
 
-**Note:** Replace `eth0` with the name of your server's primary network interface.
+> **Note**: IPv6 forwarding may interfere with your existing IPv6 configuration:
+> If you are using Router Advertisements to get IPv6 settings for your host's
+> interfaces, set `accept_ra` to `2` using the following command.  
+> Otherwise IPv6 enabled forwarding will result in rejecting Router
+> Advertisements.
+> 
+>     $ sysctl net.ipv6.conf.eth0.accept_ra=2
+
+— [docker.github.io/ipv6.md at c0eb65aabe4de94d56bbc20249179f626df5e8c3 · docker/docker.github.io](https://github.com/docker/docker.github.io/blob/c0eb65aabe4de94d56bbc20249179f626df5e8c3/engine/userguide/networking/default_network/ipv6.md)
+
+**Note**: Replace `eth0` with the name of your server's primary network interface.
 
 ```bash
 sudo reboot
@@ -112,7 +122,7 @@ sudo reboot
 sudo nano /etc/docker/daemon.json
 ```
 
-> **Note:** IPv6 networking is only supported on Docker daemons running on Linux
+> **Note**: IPv6 networking is only supported on Docker daemons running on Linux
 > hosts.
 
 — [Enable IPv6 support | Docker Documentation](https://docs.docker.com/config/daemon/ipv6/)
@@ -131,7 +141,7 @@ sudo nano /etc/docker/daemon.json
 sudo reboot
 ```
 
-**Note:** In my case, the `docker0` bridge only got an IPv6 Gateway assigned after a
+**Note**: In my case, the `docker0` bridge only got an IPv6 Gateway assigned after a
 reboot.
 
 #### Inspection
@@ -246,6 +256,7 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 *  Configure kernel parameters at boot:
    [wido/docker-ipv6](https://github.com/wido/docker-ipv6)
+    *  [docker.github.io/ipv6.md at c0eb65aabe4de94d56bbc20249179f626df5e8c3 · docker/docker.github.io](https://github.com/docker/docker.github.io/blob/c0eb65aabe4de94d56bbc20249179f626df5e8c3/engine/userguide/networking/default_network/ipv6.md)
 *  Set up nftables: [debian, docker and nftables](https://ehlers.berlin/blog/nftables-and-docker/)
 *  Modify docker daemon: [Docker IPV6 Guide - DEV Community](https://dev.to/csgeek/docker-ipv6-guide-235d)
     *  [dockerd | Docker Documentation > Daemon configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file)
