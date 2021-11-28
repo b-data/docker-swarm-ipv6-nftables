@@ -132,9 +132,8 @@ docker stack deploy -c docker-compose.yml busybox
 docker exec -ti $(docker ps -q -f name=busybox_ipv6) ping6 -c 4 google.com
 ```
 
-**Note:** Setting `net.ipv6.conf.eth0.accept_ra=2` in
-`/etc/sysctl.d/99-ipv6.conf` is required for this to work.  
-:information_source: I don't understand exactly why this is needed.
+**Note**: Setting `net.ipv6.conf.eth0.accept_ra=2` in
+`/etc/sysctl.d/99-ipv6.conf` is required for this to work.
 
 ### Container to container
 
@@ -156,14 +155,14 @@ Test using `overlay` network:
 docker exec -ti $(docker ps -q -f name=busybox_ipv6) ping6 traefik
 ```
 
-**Note:** IPv6 service discovery works perfectly well in `bridge` networks,
+**Note**: IPv6 service discovery works perfectly well in `bridge` networks,
 though.
 
 #### Consequence
 
 This means that Docker containers in an `overlay` network communicate via IPv4.
 
-**Note:** [Alpine](https://hub.docker.com/_/alpine)-based containers seem to
+**Note**: [Alpine](https://hub.docker.com/_/alpine)-based containers seem to
 have a problem with dual-stack `overlay` networks.  
 Use the _default_ version (e.g. `nginx` instead of `nginx:alpine`) to avoid any
 problems.
@@ -177,7 +176,7 @@ is a subnet of `2001:db8::/32`, which is
 
 — [RFC 3849: IPv6 Address Prefix Reserved for Documentation](https://www.rfc-editor.org/rfc/rfc3849)
 
-Therefore, the private `fd00::/80` subnet is used in this project.
+Therefore, private `fd00:[0, ffff]::/80` subnets are used in this project.
 
 ## References
 
