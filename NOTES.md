@@ -160,7 +160,7 @@ though.
 
 #### Consequence
 
-This means that Docker containers in an `overlay` network communicate via IPv4.
+This means that docker containers in an `overlay` network communicate via IPv4.
 
 **Note**: [Alpine](https://hub.docker.com/_/alpine)-based containers seem to
 have a problem with dual-stack `overlay` networks.  
