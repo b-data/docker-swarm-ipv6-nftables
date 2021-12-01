@@ -2,9 +2,9 @@
 
 # Docker swarm + IPv6 + nftables
 
-I have been running a single-node docker swarm on a Debian host for years. Since
-my ISP has also been providing IPv6 addresses for some time, I wanted to know
-whether Docker can handle a dual-stack network.
+b-data has been running a single-node docker swarm on a Debian host for years.
+Since our ISP has also been providing IPv6 addresses for some time, I wanted to
+know whether Docker can handle a dual-stack network.
 
 What [this project](https://gitlab.com/b-data/docker/docker-swarm-ipv6-nftables)
 is about:
