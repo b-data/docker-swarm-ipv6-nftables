@@ -225,19 +225,19 @@ webproxy
 
 Wait a few minutes and visit http://hostname.dyndns.org.
 
-This project is used to serve https://whoami.dyndns.org. You may `curl` this
+This project is used to serve https://whoami.b-data.ch. You may `curl` this
 website until further notice.
 
 Resolving to IPv4 address only:
 
 ```bash
-curl -4 https://whoami.dyndns.org
+curl -4 https://whoami.b-data.ch
 ```
 
 Resolving to IPv6 address only:
 
 ```bash
-curl -6 https://whoami.dyndns.org
+curl -6 https://whoami.b-data.ch
 ```
 
 ## Contributing
