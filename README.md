@@ -29,8 +29,8 @@ What this project is **not** about:
 *  [Install](#install)
 *  [Usage](#usage)
 *  [Contributing](#contributing)
-*  [License](#license)
 *  [References](#references)
+*  [License](#license)
 
 ## Prerequisites
 
@@ -248,10 +248,6 @@ This project follows the
 [Contributor Covenant](https://www.contributor-covenant.org)
 [Code of Conduct](CODE_OF_CONDUCT.md).
 
-## [License](LICENSE.md)
-
-This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-
 ## References
 
 *  Configure kernel parameters at boot:
@@ -263,3 +259,7 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
     *  [Enable IPv6 support | Docker Documentation](https://docs.docker.com/config/daemon/ipv6/)
 
 See also [notes](NOTES.md) for further information.
+
+## [License](LICENSE.md)
+
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
