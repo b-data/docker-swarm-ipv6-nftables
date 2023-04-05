@@ -39,8 +39,8 @@ What this project is **not** about:
 
 This projects requires a
 [DynDNS](https://oci.dyn.com/dynamic-dns-hostname-search/) account and
-the installation of ddclient, docker and docker compose (v2) on a Debian-based
-Linux distribution.
+the installation of ddclient, docker and docker compose on a Debian-based Linux
+distribution.
 
 ### ddclient
 
@@ -56,10 +56,6 @@ To install docker, follow the instructions for your platform:
 
 *  [Install Docker Engine | Docker Documentation > Supported platforms](https://docs.docker.com/engine/install/#supported-platforms)
 *  [Post-installation steps for Linux | Docker Documentation](https://docs.docker.com/engine/install/linux-postinstall/)
-
-### Docker Compose
-
-*  [Compose V2 | Docker Documentation > Installing Compose V2](https://docs.docker.com/compose/cli-command/#installing-compose-v2)
 
 ## Install
 
