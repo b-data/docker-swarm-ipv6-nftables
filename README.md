@@ -1,5 +1,8 @@
 [![minimal-readme compliant](https://img.shields.io/badge/readme%20style-minimal-brightgreen.svg)](https://github.com/RichardLitt/standard-readme/blob/master/example-readmes/minimal-readme.md) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" height = 20 /></a>
 
+| :exclamation: Users of Swarm overlay networks should review [GHSA-vwm3-crmr-xfxw](https://github.com/moby/moby/security/advisories/GHSA-vwm3-crmr-xfxw) to ensure that unintentional exposure has not occurred. |
+|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
 # Docker swarm + IPv6 + nftables
 
 b-data has been running a single-node docker swarm on a Debian host for years.
@@ -162,15 +165,15 @@ sudo nft list ruleset
 
 ```bash
 docker network create \
---subnet 172.18.0.0/16 \
---gateway 172.18.0.1 \
---ipv6 \
---subnet fd00:1::/80 \
---gateway fd00:1::1 \
---opt com.docker.network.bridge.name=docker_gwbridge \
---opt com.docker.network.bridge.enable_icc=false \
---opt com.docker.network.bridge.enable_ip_masquerade=true \
-docker_gwbridge
+  --ipv6 \
+  -o com.docker.network.bridge.name=docker_gwbridge \
+  -o com.docker.network.bridge.enable_icc=false \
+  -o com.docker.network.bridge.enable_ip_masquerade=true \
+  --subnet 172.18.0.0/16 \
+  --gateway 172.18.0.1 \
+  --subnet fd00:1::/80 \
+  --gateway fd00:1::1 \
+  docker_gwbridge
 ```
 
 #### [Create a swarm | Docker Documentation](https://docs.docker.com/engine/swarm/swarm-tutorial/create-swarm/)
@@ -191,11 +194,12 @@ docker network inspect docker_gwbridge
 
 ```bash
 docker network create \
--d overlay \
---subnet "10.0.2.0/24" \
---ipv6 \
---subnet "fd00:2::/80" \
-webproxy
+  -d overlay \
+  --ipv6 \
+  -o encrypted \
+  --subnet "10.0.2.0/24" \
+  --subnet "fd00:2::/80" \
+  webproxy
 ```
 
 #### Install Træfik + whoami
